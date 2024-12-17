@@ -1,0 +1,25 @@
+# @format
+
+service: sensify-backend-dashboard
+frameworkVersion: "3"
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  stage: dev
+  memorySize: 2048
+  timeout: 5
+  region: us-east-1
+
+package:  {
+  individually:true
+  }
+
+functions:
+  hello:
+    handler: handler.hello
+    events:
+      - http: ANY /{proxy+}
+      - http: ANY /
+        cors: true
+
